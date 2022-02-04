@@ -1,10 +1,39 @@
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
+import "./App.scss";
+
+import { Footer,
+  Header,
+  Home,
+  MovieDetail,
+  PageNotFound} from './Components/';
+// import { PageNotFound } from './Components';
 
 function App() {
   return (
+    <>
     <div className="App">
-Hello luv lets learn redux
+    <Router>
+    <Header/>
+    <div className="container">
+    <Routes>
+     
+    <Route path="/" element={<Home />}/>
+        <Route path="movie:imdbID" element={<MovieDetail />} />
+        <Route path="*" element={<PageNotFound />} />
+        {/* </Route> */}
+       
+    </Routes>
     </div>
+    <Footer/>
+  </Router>
+    </div>
+    </>
   );
 }
 
