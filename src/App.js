@@ -14,7 +14,8 @@ import { Footer,
   PageNotFound} from './Components/';
 // import { PageNotFound } from './Components';
 
-function App() {
+function App(store) {
+  console.log("store",store)
   return (
     <>
     <div className="App">
