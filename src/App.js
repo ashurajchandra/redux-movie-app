@@ -25,7 +25,7 @@ function App(store) {
     <Routes>
      
     <Route path="/" element={<Home />}/>
-        <Route path="movie:imdbID" element={<MovieDetail />} />
+        <Route path="/movie/:imdbID" element={<MovieDetail />} />
         <Route path="*" element={<PageNotFound />} />
         {/* </Route> */}
        

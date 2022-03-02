@@ -1,30 +1,25 @@
 import React,{useEffect} from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {MovieListing} from '../';
-import movieApi from "../../Common/Apis/MovieApi";
-import {APIKey} from "../../Common/Apis/MovieApiKey";
-import { addMovies } from '../../Features/Movies/MovieSlice';
+import { fetchMoviesData, fetchSeriesData, getLoading,setIsLoadingFalse } from '../../Features/Movies/MovieSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const movieText = "Harry";
+  const isLoading = useSelector(getLoading)
+  const movieText ="Harry";
+  const seriesText ="Friends"
+  console.log("isLoading",isLoading)
     useEffect(() => {
-       const fetchMovies = async ()=>{
-        const response = await movieApi.get(
-            `?apiKey=${APIKey}&s=${movieText}&type=movie`
-          )
-        .catch((error)=>{
-            console.log("THE RESPONSE FROM ERROR",error);
-        })
-        console.log("API RESPONSE:",response)
-        dispatch(addMovies(response.data))
-       }
-       fetchMovies()
-      },[]);
+      dispatch(fetchMoviesData(movieText))
+      dispatch(fetchSeriesData(seriesText));
+      return () => {
+        dispatch(setIsLoadingFalse());
+      };
+      },[dispatch]);
     return (
         <div>
-            home
-            <MovieListing/>
+          {isLoading?<div >loading....</div>:<MovieListing/>}
+            
         </div>
     );
 };
